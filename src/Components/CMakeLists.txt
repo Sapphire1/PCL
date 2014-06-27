@@ -27,6 +27,6 @@ ADD_COMPONENT(PassThrough)
 
 ADD_COMPONENT(StatisticalOutlierRemoval)
 
-
+ADD_COMPONENT(RANSACBoardPlane)
 
 ADD_COMPONENT(ClustersViewer)

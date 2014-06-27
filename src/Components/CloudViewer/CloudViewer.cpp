@@ -85,7 +85,7 @@ bool CloudViewer::onInit() {
 		viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 0.5, "sample cloud");
 	}
 		if(prop_coordinate_system)
-			viewer->addCoordinateSystem (1.0);
+            viewer->addCoordinateSystem (1.0,1);
 		
 		viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 0.5, "sample cloud");
 		viewer->initCameraParameters ();

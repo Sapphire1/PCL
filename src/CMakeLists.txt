@@ -13,7 +13,7 @@ include_directories(SYSTEM ${Boost_INCLUDE_DIR})
 # Find another necessary libraries
 
 # # OpenCV library
-# FIND_PACKAGE( OpenCV REQUIRED )
+FIND_PACKAGE( OpenCV REQUIRED )
 
 FIND_PACKAGE(PCL 1.3 REQUIRED)
 include_directories(${PCL_INCLUDE_DIRS})
