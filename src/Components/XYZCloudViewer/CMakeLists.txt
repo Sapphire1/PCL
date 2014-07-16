@@ -1,4 +1,3 @@
-#set(PCL_DIR "/home/mlaszkow/pcl/share/")
 # Include the directory itself as a path to include directories
 SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -6,12 +5,13 @@ SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 FILE(GLOB files *.cpp)
 
 # Find required packages
-find_package(PCL 1.7.1 REQUIRED)
+FIND_PACKAGE( OpenCV REQUIRED )
+FIND_PACKAGE( PCL 1.7.1 REQUIRED )
 
 # Create an executable file from sources:
-ADD_LIBRARY(VoxelGrid SHARED ${files})
+ADD_LIBRARY(XYZCloudViewer SHARED ${files})
 
 # Link external libraries
-TARGET_LINK_LIBRARIES(VoxelGrid ${DisCODe_LIBRARIES} ${PCL_LIBRARIES})
+TARGET_LINK_LIBRARIES(XYZCloudViewer ${OpenCV_LIBS} ${DisCODe_LIBRARIES} ${PCL_LIBRARIES})
 
-INSTALL_COMPONENT(VoxelGrid)
+INSTALL_COMPONENT(XYZCloudViewer)

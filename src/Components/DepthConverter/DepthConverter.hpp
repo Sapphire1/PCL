@@ -7,12 +7,11 @@
 #ifndef DEPTHCONVERTER_HPP_
 #define DEPTHCONVERTER_HPP_
 
-#include "Component_Aux.hpp"
-#include "Component.hpp"
-#include "Panel_Empty.hpp"
-#include "DataStream.hpp"
-#include "Property.hpp"
-#include "EventHandler2.hpp"
+#include <Component_Aux.hpp>
+#include <Component.hpp>
+#include <DataStream.hpp>
+#include <Property.hpp>
+#include <EventHandler2.hpp>
 
 #include <Types/CameraInfo.hpp>
 #include <Types/Features.hpp> 
@@ -21,6 +20,8 @@
 
 #include <pcl/point_types.h>
 #include <pcl/point_cloud.h>
+
+
 
 namespace Processors {
 namespace DepthConverter {
@@ -79,7 +80,8 @@ protected:
 	Base::EventHandler2 h_process_depth;
 	Base::EventHandler2 h_process_depth_mask;
 	Base::EventHandler2 h_process_depth_mask_color;
-	Base::EventHandler2 h_process_all;
+	Base::EventHandler2 h_process_depth_color;
+	
 
 	
 	// Handlers
@@ -87,8 +89,10 @@ protected:
 	void process_depth();
 	
 	void process_depth_mask_color();
-	void process_all();
+	void process_depth_color();
+	
 
+	Base::Property<bool> prop_remove_nan;
 };
 
 } //: namespace DepthConverter

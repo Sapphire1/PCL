@@ -21,14 +21,15 @@ ADD_COMPONENT(ClusterExtraction)
 
 ADD_COMPONENT(SHOT)
 
-ADD_COMPONENT(SIFTAdder)
+ADD_COMPONENT(XYZCloudViewer)
 
-ADD_COMPONENT(JSONWriter)
+ADD_COMPONENT(PassThrough)
 
-ADD_COMPONENT(JSONReader)
+ADD_COMPONENT(StatisticalOutlierRemoval)
 
-ADD_COMPONENT(FeatureCloudConverter)
+ADD_COMPONENT(RANSACBoardPlane)
 
+<<<<<<< HEAD
 ADD_COMPONENT(FLANN)
 
 ADD_COMPONENT(CloudCutter)
@@ -43,3 +44,6 @@ ADD_COMPONENT(XYZCloudViewer)
 
 ADD_COMPONENT(PCLCloudFilter)
 
+=======
+ADD_COMPONENT(ClustersViewer)
+>>>>>>> 4505dd193bbdb26b5212796a6f7bdbd608f37403

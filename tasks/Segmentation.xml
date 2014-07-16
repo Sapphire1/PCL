@@ -3,20 +3,20 @@
 	<!-- reference task information -->
 	<Reference>
 		<Author>
-			<name>Maciej Stefańczyk</name>
+			<name>Michał Laszkowski</name>
 			<link></link>
 		</Author>
 		
 		<Description>
-			<brief>Simple PCL viewer</brief>
-			<full>Simple PCL viewer, using PCD as source of depth data.</full>	
+			<brief>ClustersViewer</brief>
+			<full></full>	
 		</Description>
 	</Reference>
 	
 	<!-- task definition -->
 	<Subtasks>
 		<Subtask name="Processing">
-			<Executor name="Exec1"  period="0.1">
+			<Executor name="Exec1"  period="1">
 				<Component name="Source" type="PCL:PCDReader" priority="1" bump="0">
 					<param name="filename">/home/lzmuda/PCL_Plane/table_scene_mug_stereo_textured.pcd</param>
 				</Component>
@@ -27,11 +27,17 @@
 			</Executor>
 		</Subtask>
 		
+<<<<<<< HEAD
 		<!--Subtask name="Visualisation">
 			<Executor name="Exec2" period="0.01">
 				<Component name="Window1" type="PCL:CloudViewer" priority="1" bump="0">
 				</Component>
 				<Component name="Window2" type="PCL:CloudViewer" priority="1" bump="0">
+=======
+		<Subtask name="Visualisation">
+			<Executor name="Exec2" period="1">
+				<Component name="Window" type="PCL:ClustersViewer" priority="1" bump="0">
+>>>>>>> 4505dd193bbdb26b5212796a6f7bdbd608f37403
 				</Component>
 			</Executor>
 		</Subtask-->
@@ -44,8 +50,9 @@
 	
 	<!-- pipes connecting datastreams -->
 	<DataStreams>
-		<Source name="Source.out_pcl">
+		<Source name="Source.out_cloud_xyz">
 			<sink>RANSAC.in_pcl</sink>
+<<<<<<< HEAD
 			
 		</Source>
 <!--		<Source name="Source.out_pcl_ptr">
@@ -53,11 +60,19 @@
 		</Source>-->
 		<!--Source name="RANSAC.out_inliers">
 			<sink>Window1.in_cloud_xyz</sink>
+=======
+>>>>>>> 4505dd193bbdb26b5212796a6f7bdbd608f37403
 		</Source>
 		<Source name="RANSAC.out_outliers">
-			<sink>Window2.in_cloud_xyz</sink>
 			<sink>ClusterExtraction.in_pcl</sink>
+<<<<<<< HEAD
 		</Source-->
+=======
+		</Source>
+		<Source name="ClusterExtraction.out_clusters">
+			<sink>Window.in_clouds</sink>
+		</Source>
+>>>>>>> 4505dd193bbdb26b5212796a6f7bdbd608f37403
 	</DataStreams>
 </Task>
 

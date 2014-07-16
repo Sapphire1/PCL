@@ -20,18 +20,22 @@ PCDReader::PCDReader(const std::string & name) :
 		Base::Component(name), 
 		filename("filename", std::string("")) 
 		{
-		registerProperty(filename);
+	// Register property.
+	registerProperty(filename);
+	CLOG(LTRACE) << "Hi PCDReader\n";
 
 }
 
 PCDReader::~PCDReader() {
+	CLOG(LTRACE) << "Bye PCDReader\n";
 }
 
 void PCDReader::prepareInterface() {
 	// Register data streams, events and event handlers HERE!
-	registerStream("out_pcl", &out_pcl);
-	registerStream("out_pcl_xyzsift", &out_pcl_xyzsift);
-	// Register handlers
+	registerStream("out_cloud_xyz", &out_cloud_xyz);
+	registerStream("out_cloud_xyzrgb", &out_cloud_xyzrgb);
+    //registerStream("out_cloud_xyzsift", &out_cloud_xyzsift);
+    // Register handlers
 	h_Read.setup(boost::bind(&PCDReader::Read, this));
 	registerHandler("Read", &h_Read);
 	//addDependency("Read", NULL);
@@ -39,7 +43,8 @@ void PCDReader::prepareInterface() {
 }
 
 bool PCDReader::onInit() {
-
+	// Read point cloud at start.
+	Read();
 	return true;
 }
 
@@ -56,19 +61,32 @@ bool PCDReader::onStart() {
 }
 
 void PCDReader::Read() {
-	  pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
-	  if (pcl::io::loadPCDFile<pcl::PointXYZ> (filename, *cloud) == -1) //* load the file
+	CLOG(LTRACE) << "PCDReader::Read\n";
+	// Try to read the XYZ file.
+	  pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_xyz (new pcl::PointCloud<pcl::PointXYZ>);
+	  if (pcl::io::loadPCDFile<pcl::PointXYZ> (filename, *cloud_xyz) == -1)
 	  {
-		cout <<"Błąd"<<endl;
+		CLOG(LWARNING) <<"Cannot read PointXYZ cloud from "<<filename;
 	  }
-	  out_pcl.write(cloud);
+	  else
+		out_cloud_xyz.write(cloud_xyz);
 	  
-	  pcl::PointCloud<PointXYZSIFT>::Ptr cloud_xyzsift (new pcl::PointCloud<PointXYZSIFT>);
-	  if (pcl::io::loadPCDFile<PointXYZSIFT> (filename, *cloud_xyzsift) == -1) //* load the file
+	  pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_xyzrgb (new pcl::PointCloud<pcl::PointXYZRGB>);
+	  if (pcl::io::loadPCDFile<pcl::PointXYZRGB> (filename, *cloud_xyzrgb) == -1)
 	  {
-		cout <<"Błąd"<<endl;
+		CLOG(LWARNING) <<"Cannot read PointXYZRGB cloud from "<<filename;
 	  }
-	  out_pcl_xyzsift.write(cloud_xyzsift);	
+	  else
+		  out_cloud_xyzrgb.write(cloud_xyzrgb);
+
+/*	  pcl::PointCloud<PointXYZSIFT>::Ptr cloud_xyzsift (new pcl::PointCloud<PointXYZSIFT>);
+      if (pcl::io::loadPCDFile<PointXYZSIFT> (filename, *cloud_xyzsift) == -1)
+      {
+        CLOG(LWARNING) <<"Cannot read PointXYZSIFT cloud from "<<filename;
+      }
+      else
+          out_cloud_xyzsift.write(cloud_xyzsift);
+          */
 }
 
 

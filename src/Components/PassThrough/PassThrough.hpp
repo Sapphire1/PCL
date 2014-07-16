@@ -4,8 +4,8 @@
  * \author Micha Laszkowski
  */
 
-#ifndef PCDREADER_HPP_
-#define PCDREADER_HPP_
+#ifndef PASSTHROUGH_HPP_
+#define PASSTHROUGH_HPP_
 
 #include "Component_Aux.hpp"
 #include "Component.hpp"
@@ -13,31 +13,29 @@
 #include "Property.hpp"
 #include "EventHandler2.hpp"
 
-#include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
-#include <pcl/io/pcd_io.h>
-//#include <Types/PointXYZSIFT.hpp>
+#include <pcl/filters/passthrough.h>
 
 namespace Processors {
-namespace PCDReader {
+namespace PassThrough {
 
 /*!
- * \class PCDReader
- * \brief PCDReader processor class.
+ * \class PassThrough
+ * \brief PassThrough processor class.
  *
- * PCDReader processor.
+ * PassThrough processor.
  */
-class PCDReader: public Base::Component {
+class PassThrough: public Base::Component {
 public:
 	/*!
 	 * Constructor.
 	 */
-	PCDReader(const std::string & name = "PCDReader");
+	PassThrough(const std::string & name = "PassThrough");
 
 	/*!
 	 * Destructor
 	 */
-	virtual ~PCDReader();
+	virtual ~PassThrough();
 
 	/*!
 	 * Prepare components interface (register streams and handlers).
@@ -71,27 +69,33 @@ protected:
 
 // Input data streams
 
+		Base::DataStreamIn<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> in_cloud;
 
 // Output data streams
-		Base::DataStreamOut<pcl::PointCloud<pcl::PointXYZ>::Ptr > out_cloud_xyz;
-		Base::DataStreamOut<pcl::PointCloud<pcl::PointXYZRGB>::Ptr > out_cloud_xyzrgb;
-//		Base::DataStreamOut<pcl::PointCloud<PointXYZSIFT>::Ptr > out_cloud_xyzsift;
+
+		Base::DataStreamOut<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> out_cloud;
 	// Handlers
-	Base::EventHandler2 h_Read;
-	Base::Property<std::string> filename;
+	Base::EventHandler2 h_filter;
+		Base::Property<float> xa;
+		Base::Property<float> xb;
+		Base::Property<float> ya;
+		Base::Property<float> yb;
+		Base::Property<float> za;
+		Base::Property<float> zb;
+		Base::Property<bool> negative;
 
 	
 	// Handlers
-	void Read();
+	void filter();
 
 };
 
-} //: namespace PCDReader
+} //: namespace PassThrough
 } //: namespace Processors
 
 /*
  * Register processor component.
  */
-REGISTER_COMPONENT("PCDReader", Processors::PCDReader::PCDReader)
+REGISTER_COMPONENT("PassThrough", Processors::PassThrough::PassThrough)
 
-#endif /* PCDREADER_HPP_ */
+#endif /* PASSTHROUGH_HPP_ */
