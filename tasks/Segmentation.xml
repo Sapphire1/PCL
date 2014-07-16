@@ -18,24 +18,23 @@
 		<Subtask name="Processing">
 			<Executor name="Exec1"  period="0.1">
 				<Component name="Source" type="PCL:PCDReader" priority="1" bump="0">
-					<param name="filename">/home/mlaszkow/pcd/stol.pcd</param>
+					<param name="filename">/home/lzmuda/PCL_Plane/table_scene_mug_stereo_textured.pcd</param>
 				</Component>
-				<Component name="RANSAC" type="PCL:RANSACPlane" priority="1" bump="0">
+				<Component name="RANSAC" type="PCL:RANSACPlane" priority="2" bump="0">
 				</Component>
-				<Component name="ClusterExtraction" type="PCL:ClusterExtraction" priority="1" bump="0">
-				</Component>
-
+				<!--Component name="ClusterExtraction" type="PCL:ClusterExtraction" priority="1" bump="0">
+				</Component-->
 			</Executor>
 		</Subtask>
 		
-		<Subtask name="Visualisation">
+		<!--Subtask name="Visualisation">
 			<Executor name="Exec2" period="0.01">
 				<Component name="Window1" type="PCL:CloudViewer" priority="1" bump="0">
 				</Component>
 				<Component name="Window2" type="PCL:CloudViewer" priority="1" bump="0">
 				</Component>
 			</Executor>
-		</Subtask>
+		</Subtask-->
 	
 	</Subtasks>
 	
@@ -52,13 +51,13 @@
 <!--		<Source name="Source.out_pcl_ptr">
 			<sink>Window.in_cloud_xyz</sink>
 		</Source>-->
-		<Source name="RANSAC.out_inliers">
+		<!--Source name="RANSAC.out_inliers">
 			<sink>Window1.in_cloud_xyz</sink>
 		</Source>
 		<Source name="RANSAC.out_outliers">
 			<sink>Window2.in_cloud_xyz</sink>
 			<sink>ClusterExtraction.in_pcl</sink>
-		</Source>
+		</Source-->
 	</DataStreams>
 </Task>
 

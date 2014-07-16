@@ -72,6 +72,7 @@ bool CloudViewer::onStart() {
 void CloudViewer::on_cloud_xyz() {
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud = in_cloud_xyz.read();
 	viewer->updatePointCloud<pcl::PointXYZ> (cloud, "sample cloud");
+
 }
 
 void CloudViewer::on_cloud_xyzrgb() {

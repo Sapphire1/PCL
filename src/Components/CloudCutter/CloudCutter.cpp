@@ -61,7 +61,6 @@ bool CloudCutter::onStart() {
 void CloudCutter::cut() {
 	pcl::PointCloud<PointXYZSIFT>::Ptr cloud = in_cloud.read();
 	pcl::PointCloud<pcl::PointXYZ>::Ptr indices = in_indices.read();
-	
 	pcl::KdTreeFLANN<PointXYZSIFT> kdtree; 
 	kdtree.setInputCloud (cloud); 
 	
@@ -79,6 +78,7 @@ void CloudCutter::cut() {
                 cout<<"Znaleziono " <<pointIdxRadiusSearch.size() << " punktów"<<endl;
                 for (size_t i = 0; i < pointIdxRadiusSearch.size (); ++i){
 					cloud->erase(cloud->begin() + pointIdxRadiusSearch[i] -1);//-1??
+					;
 				}
                 
                 

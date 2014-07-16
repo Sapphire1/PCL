@@ -42,8 +42,7 @@ void PCDWriter::prepareInterface() {
     registerHandler("Write_xyzsift", &h_Write_xyzsift);
     h_Write_xyzrgb.setup(boost::bind(&PCDWriter::Write_xyzrgb, this));
     registerHandler("Write_xyzrgb", &h_Write_xyzrgb);
-	//addDependency("Write", &in_pcl);
-
+    //addDependency("Write", &in_pcl);
 }
 
 bool PCDWriter::onInit() {
@@ -67,14 +66,12 @@ void PCDWriter::Write() {
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud = in_pcl.read();
 	pcl::io::savePCDFileASCII (filename, *cloud);
 	std::cerr << "Saved " << cloud->points.size () << " data points to "<< filename << std::endl;
-	
 }
 
 void PCDWriter::Write_xyzsift() {
     pcl::PointCloud<PointXYZSIFT>::Ptr cloud = in_pcl_xyzsift.read();
     pcl::io::savePCDFileASCII (filename, *cloud);
     std::cerr << "Saved " << cloud->points.size () << " data points to "<< filename << std::endl;
-
 }
 
 void PCDWriter::Write_xyzrgb() {
@@ -82,7 +79,6 @@ void PCDWriter::Write_xyzrgb() {
     pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud = in_pcl_xyzrgb.read();
     pcl::io::savePCDFileASCII (filename, *cloud);
     std::cerr << "Saved " << cloud->points.size () << " data points to "<< filename << std::endl;
-
 }
 
 

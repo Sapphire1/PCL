@@ -1,7 +1,7 @@
 /*!
  * \file
  * \brief 
- * \author Micha Laszkowski
+ * \author Micha Laszkowski, Lukasz Zmuda
  */
 
 #ifndef RANSACPLANE_HPP_
@@ -54,6 +54,9 @@ public:
 	 * values set in config file.
 	 */
 	void prepareInterface();
+	
+	Base::Property<int> prop_alfa_treshold;
+	Base::Property<int> prop_iter_treshold;
 
 protected:
 
@@ -77,15 +80,20 @@ protected:
 	 */
 	bool onStop();
 
+	//double alfaTreshold = 30;
+	//int iterTreshold = 5;
+	
 
-// Input data streams
+	// Input data streams
 
-		Base::DataStreamIn<pcl::PointCloud<pcl::PointXYZRGB>::Ptr > in_pcl;
+	 Base::DataStreamIn<pcl::PointCloud<pcl::PointXYZRGB>::Ptr > in_pcl;
 
-// Output data streams
+	// Output data streams
 
-		Base::DataStreamOut<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> out_outliers;
-		Base::DataStreamOut<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> out_inliers;
+	Base::DataStreamOut<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> out_outliers;
+	//Base::DataStreamOut<pcl::PointCloud<pcl::PointXYZRGB>> out_outliers;
+	Base::DataStreamOut<pcl::PointCloud<pcl::PointXYZRGB>::Ptr> out_inliers;
+	Base::DataStreamOut<pcl::PointCloud<pcl::PointXYZRGB>::Ptr>  out_object_points;
 	// Handlers
 	Base::EventHandler2 h_ransac;
 
