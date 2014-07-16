@@ -71,16 +71,6 @@ protected:
 
 // Input data streams
 
-<<<<<<< HEAD
-	Base::DataStreamIn<pcl::PointCloud<pcl::PointXYZ>::Ptr > in_pcl;
-        Base::DataStreamIn<pcl::PointCloud<PointXYZSIFT>::Ptr > in_pcl_xyzsift;
-	Base::DataStreamIn<pcl::PointCloud<pcl::PointXYZRGB>::Ptr > in_pcl_xyzrgb;
-// Output data streams
-
-	// Handlers
-    Base::EventHandler2 h_Write;
-    Base::EventHandler2 h_Write_xyzsift;
-=======
 		Base::DataStreamIn<pcl::PointCloud<pcl::PointXYZ>::Ptr > in_cloud_xyz;
 //        Base::DataStreamIn<pcl::PointCloud<PointXYZSIFT>::Ptr > in_cloud_xyzsift;
 		Base::DataStreamIn<pcl::PointCloud<pcl::PointXYZRGB>::Ptr > in_cloud_xyzrgb;
@@ -89,19 +79,13 @@ protected:
 	// Handlers
 	Base::EventHandler2 h_Write_xyz;
 //    Base::EventHandler2 h_Write_xyzsift;
->>>>>>> 4505dd193bbdb26b5212796a6f7bdbd608f37403
     Base::EventHandler2 h_Write_xyzrgb;
-	
-    Base::Property<std::string> filename;
-	
+
+	Base::Property<std::string> filename;
+
 	// Handlers
-<<<<<<< HEAD
-    void Write();
-    void Write_xyzsift();
-=======
 	void Write_xyz();
 //    void Write_xyzsift();
->>>>>>> 4505dd193bbdb26b5212796a6f7bdbd608f37403
     void Write_xyzrgb();
 
 };

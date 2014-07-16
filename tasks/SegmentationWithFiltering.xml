@@ -20,7 +20,7 @@
 				<Component name="Source" type="PCL:PCDReader" priority="1" bump="0">
 					<param name="filename">/home/lzmuda/PCL_Plane/table_scene_mug_stereo_textured.pcd</param>
 				</Component>
-				<Component name="RANSAC" type="PCL:RANSACPlane" priority="2" bump="0">
+				<Component name="RANSAC" type="PCL:RANSACPlaneRemover" priority="2" bump="0">
 				</Component>
 				<Component name="PCLCloudFilter" type="PCL:PCLCloudFilter" priority="3" bump="0">
 				</Component>
@@ -57,7 +57,7 @@
 	
 	<!-- pipes connecting datastreams -->
 	<DataStreams>
-		<Source name="Source.out_pcl">
+		<Source name="Source.out_cloud_xyz">
 			<sink>PCLCloudFilter.in_cloud_pcl</sink>
 		</Source>
 		<Source name="PCLCloudFilter.out_filtered_cloud_pcl">
@@ -77,7 +77,7 @@
 		<!-- Komponent znajduje segment zawierający odpowiednią płaszczyznę-->
 		<Source name="ClusterExtraction.out_the_biggest_cluster">
 			<sink>Cluster.in_cloud_xyz</sink>
-			<sink>Writer.in_pcl</sink>
+			<sink>Writer.in_cloud_xyz</sink>
 		</Source>
 		<!--Source name="RANSAC.out_outliers">
 			<sink>Outliers.in_cloud_xyz</sink>
