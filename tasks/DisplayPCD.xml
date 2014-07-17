@@ -17,13 +17,8 @@
 	<Subtasks>
 		<Subtask name="Processing">
 			<Executor name="Exec1"  period="0.1">
-<<<<<<< HEAD
 				<Component name="Source" type="PCL:PCDReader" priority="1" bump="0">
-					<param name="filename">/home/lzmuda/DCL/CameraPGR/data/stereo/cloud.pcd</param>
-=======
-				<Component name="Source" type="PCL:PCDReader" priority="1" bump="2">
-					<param name="filename">/home/tkornuta/Objects/cereal_box_1_co5_xyzrgb.pcd</param>					
->>>>>>> 4505dd193bbdb26b5212796a6f7bdbd608f37403
+					<param name="filename">/home/lzmuda/PCL_Plane/newMask.pcd</param>
 				</Component>
 			</Executor>
 		</Subtask>

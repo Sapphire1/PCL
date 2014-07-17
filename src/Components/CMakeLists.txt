@@ -31,6 +31,7 @@ ADD_COMPONENT(StatisticalOutlierRemoval)
 
 ADD_COMPONENT(RANSACBoardPlane)
 
+ADD_COMPONENT(RANSACAbovePlane)
 
 #ADD_COMPONENT(FLANN)
 

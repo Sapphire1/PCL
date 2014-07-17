@@ -55,6 +55,10 @@ public:
 	 */
 	void prepareInterface();
 	
+	Base::Property<double> prop_XAxisMin_treshold;
+	Base::Property<double> prop_XAxisMax_treshold;
+	Base::Property<double> prop_YAxisMin_treshold;
+	Base::Property<double> prop_YAxisMax_treshold;
 	Base::Property<double> prop_ZAxisMin_treshold;
 	Base::Property<double> prop_ZAxisMax_treshold;
 

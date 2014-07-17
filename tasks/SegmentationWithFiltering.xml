@@ -21,8 +21,25 @@
 					<param name="filename">/home/lzmuda/PCL_Plane/table_scene_mug_stereo_textured.pcd</param>
 				</Component>
 				<Component name="RANSAC" type="PCL:RANSACPlaneRemover" priority="2" bump="0">
+					<param name="ransacPlane.alfaTreshold">10</param>	
+					<param name="ransacPlane.iterTreshold">5</param>	
+					<param name="ransacPlane.HeightLimitMin">0.02</param>
+					<param name="ransacPlane.HeightLimitMax">0.5</param>
+					<param name="ransacPlane.A1">0.038248</param>
+					<param name="ransacPlane.B1">-0.814044</param>
+					<param name="ransacPlane.C1">0.579542</param>
+					<param name="ransacPlane.D1Min">-1.0</param>
+					<param name="ransacPlane.D1Max">-0.3</param>
 				</Component>
+			</Executor>
+			<Executor name="Exec2"  period="0.1">
 				<Component name="PCLCloudFilter" type="PCL:PCLCloudFilter" priority="3" bump="0">
+					<param name="ransacFilter.XAxisMax_treshold">0.2</param>
+					<param name="ransacFilter.XAxisMin_treshold">-0.1</param>
+					<param name="ransacFilter.YAxisMax_treshold">1</param>
+					<param name="ransacFilter.YAxisMin_treshold">-0.1</param>
+					<param name="ransacFilter.ZAxisMax_treshold">1.3</param>
+					<param name="ransacFilter.ZAxisMin_treshold">0.5</param>
 				</Component>
 				<Component name="ClusterExtraction" type="PCL:ClusterExtraction" priority="4" bump="0">
 				</Component>
@@ -33,14 +50,14 @@
 		</Subtask>
 		
 		<Subtask name="Visualisation">
-			<Executor name="Exec2" period="0.01">
+			<Executor name="Exec3" period="0.01">
 				<!--Component name="Inliers" type="PCL:CloudViewer" priority="2" bump="0">
 				</Component>
 				<Component name="Outliers" type="PCL:CloudViewer" priority="3" bump="0">
+				</Component-->
+			        <Component name="ObjectPoints" type="PCL:CloudViewer" priority="1" bump="0">
 				</Component>
-			        <Component name="ObjectPoints" type="PCL:CloudViewer" priority="3" bump="0">
-				</Component>
-				<Component name="AfterFiltering" type="PCL:CloudViewer" priority="1" bump="0">
+				<!--Component name="AfterFiltering" type="PCL:CloudViewer" priority="1" bump="0">
 				</Component-->
 				<Component name="Cluster" type="PCL:CloudViewer" priority="1" bump="0">
 				</Component>
@@ -58,23 +75,17 @@
 	<!-- pipes connecting datastreams -->
 	<DataStreams>
 		<Source name="Source.out_cloud_xyz">
-			<sink>PCLCloudFilter.in_cloud_pcl</sink>
-		</Source>
-		<Source name="PCLCloudFilter.out_filtered_cloud_pcl">
 			<sink>RANSAC.in_pcl</sink>
-			<!--sink>AfterFiltering.in_cloud_xyz</sink-->
 		</Source>
-		<!--Source name="RANSAC.out_outliers">
-			<sink>Outliers.in_cloud_xyz</sink>
-		</Source-->
-	        <!--Source name="RANSAC.out_inliers">
-			<sink>Inliers.in_cloud_xyz</sink>
-		</Source-->
-	        <Source name="RANSAC.out_object_points">
-			<!--sink>ObjectPoints.in_cloud_xyz</sink-->
+		<Source name="RANSAC.out_object_points">
+			<sink>ObjectPoints.in_cloud_xyz</sink>
 			<sink>ClusterExtraction.in_pcl</sink>
 		</Source>
-		<!-- Komponent znajduje segment zawierający odpowiednią płaszczyznę-->
+		<!--Source name="PCLCloudFilter.out_filtered_cloud_pcl">
+			<sink>AfterFiltering.in_cloud_xyz</sink>
+		</Source-->
+		  
+		<!--Komponent znajduje segment zawierający odpowiednią płaszczyznę-->
 		<Source name="ClusterExtraction.out_the_biggest_cluster">
 			<sink>Cluster.in_cloud_xyz</sink>
 			<sink>Writer.in_cloud_xyz</sink>
@@ -89,7 +100,3 @@
 		</Source-->
 	</DataStreams>
 </Task>
-
-
-
-

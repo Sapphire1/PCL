@@ -57,7 +57,14 @@ public:
 	
 	Base::Property<int> prop_alfa_treshold;
 	Base::Property<int> prop_iter_treshold;
-
+	Base::Property<double> prop_HeightLimitMax;
+	Base::Property<double> prop_HeightLimitMin;
+	Base::Property<double> prop_A1;
+	Base::Property<double> prop_B1;
+	Base::Property<double> prop_C1;
+	Base::Property<double> prop_D1Min;
+	Base::Property<double> prop_D1Max;
+	
 protected:
 
 	/*!
